@@ -1,24 +1,29 @@
-
-## 1. Fonctions utilisant if, for, foreach, while
-
-# Exemple de fonction avec if, for, while
-maFonction <- function(x) {
-  if (x %% 2 == 0) {
-    print("Nombre pair")
+#1. Fonctions avec if, for, while, foreach (si installé)
+analyseNombre <- function(n) {
+  # Vérifie si le nombre est positif, négatif ou nul
+  if (n > 0) {
+    print("Le nombre est positif")
+  } else if (n < 0) {
+    print("Le nombre est négatif")
   } else {
-    print("Nombre impair")
+    print("Le nombre est nul")
   }
   
-  for (i in 1:x) {
+  # Boucle for pour afficher les n premiers entiers
+  print("Boucle for :")
+  for (i in 1:n) {
     print(i)
   }
   
-  i <- 1
-  while (i <= x) {
-    print(paste("while:", i))
-    i <- i + 1
+  # Boucle while pour compter à rebours
+  print("Boucle while :")
+  while (n > 0) {
+    print(n)
+    n <- n - 1
   }
 }
+
+
 
 
 # 2. Recherche de nombres premiers
@@ -30,14 +35,21 @@ estPremier <- function(n) {
   }
   return(TRUE)
 }
-
-# 3. Résoudre une équation simple (ex: 2x + 3 = 7)
-
-resoudreEquation <- function(a, b, c) {
-  # ax + b = c
-  x <- (c - b) / a
-  return(x)
+#resourdre une équation du second degrés
+resoudreEquation2ndDegre <- function(a, b, c) {
+  delta <- b^2 - 4*a*c
+  if (delta < 0) {
+    return("Pas de solution réelle")
+  } else if (delta == 0) {
+    x <- -b / (2*a)
+    return(paste("Une solution double:", x))
+  } else {
+    x1 <- (-b + sqrt(delta)) / (2*a)
+    x2 <- (-b - sqrt(delta)) / (2*a)
+    return(paste("Deux solutions :", x1, "et", x2))
+  }
 }
+
 
 # 4. Résoudre un système d’équations
 
@@ -58,17 +70,7 @@ inverserMatrice <- function(M) {
 }
 
 
-### Applications
 
-maFonction(9)
-
-# which
-vec <- c(3, 7, 1, 9)
-which(vec > 5)  # retourne les positions
-
-estPremier(56)
-
-resoudreEquation(4,3,2)
 
 # Définir une matrice carrée 2x2
 matrice <- matrix(c(2, 1, 3, 4), nrow = 2, byrow = TRUE)
@@ -85,16 +87,11 @@ print(inverse)
 
 
 ### Optimisation
-
-optimisation <- function() {
-  f <- function(x) (x[1]^2 + x[2]^2 + x[1]*x[2])
-  result <- optim(c(2, 2), f, method="BFGS")
-  return(result$par)
+optimiserFonction <- function() {
+  f <- function(x) (x - 3)^2 + 1
+  result <- optim(par = 0, fn = f)
+  return(result$par)  # Point du minimum
 }
-
-minimum <- optimisation()
-print("Point où le minimum est atteint :")
-print(minimum)
 
 
 ### Etude de cas primaire - Aider à resoudre les 04 opérations
